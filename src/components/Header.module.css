@@ -1,0 +1,13 @@
+.header {
+position: sticky; top: 0; z-index: 10;
+background: rgba(5,10,22,0.75);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid #1f2a44;
+}
+.inner { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-weight: 800; letter-spacing: 0.3px; }
+.nav { display: flex; gap: 16px; }
+.link {
+color: #dbe3f2; padding: 10px 12px; border-radius: 10px; transition: background .15s ease;
+}
+.link:hover { background: #0f1a33; }

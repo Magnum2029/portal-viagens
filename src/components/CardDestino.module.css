@@ -1,0 +1,13 @@
+.card {
+background: #0b1226;
+border: 1px solid #1f2a44;
+border-radius: 18px; overflow: hidden;
+transition: transform .15s ease, box-shadow .2s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+
+
+.media { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+.content { padding: 14px 16px 18px; }
+.name { font-weight: 700; margin: 0 0 4px; }
+.country { color: var(--muted); margin: 0; font-size: 14px; }
