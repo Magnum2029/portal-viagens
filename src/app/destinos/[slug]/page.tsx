@@ -6,11 +6,9 @@ import type { Metadata } from 'next';
 import styles from './page.module.css';
 import { getDestinoBySlug } from '@/lib/destinos';
 
-type PageProps = {
-  params: { slug: string };
-};
+type PageProps = { params: { slug: string } };
 
-// Metadata dinâmico para cada destino
+// Metadata dinâmico (App Router)
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
@@ -38,7 +36,7 @@ export async function generateMetadata(
 
 export default function DestinoDetalhe({ params }: PageProps) {
   const destino = getDestinoBySlug(params.slug);
-  if (!destino) return notFound(); // aciona 404 nativo
+  if (!destino) return notFound();
 
   return (
     <article className={styles.wrap}>
@@ -58,7 +56,7 @@ export default function DestinoDetalhe({ params }: PageProps) {
       </div>
 
       <div className={styles.badges}>
-        {destino.tags.map((t: string) => (
+        {destino.tags.map((t) => (
           <span key={t} className={styles.badge}>#{t}</span>
         ))}
       </div>
@@ -74,7 +72,7 @@ export default function DestinoDetalhe({ params }: PageProps) {
 
         <h3>Destaques</h3>
         <ul>
-          {destino.destaques.map((d: string, i: number) => (
+          {destino.destaques.map((d, i) => (
             <li key={`${d}-${i}`}>{d}</li>
           ))}
         </ul>
