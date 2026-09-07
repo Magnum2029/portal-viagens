@@ -1,36 +1,219 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Portal de Viagens
 
-## Getting Started
+Aplicação web desenvolvida com **Next.js, React e TypeScript** para apresentar destinos turísticos através de uma interface moderna, responsiva e organizada.
 
-First, run the development server:
+O projeto utiliza o **App Router do Next.js**, rotas dinâmicas para páginas individuais de destinos e geração dinâmica de metadados para melhorar SEO e compartilhamento nas redes sociais.
+
+---
+
+## 🚀 Funcionalidades
+
+* Listagem de destinos turísticos
+* Página individual para cada destino
+* Rotas dinâmicas utilizando `[slug]`
+* Informações sobre país, fuso horário e melhor época para visitar
+* Exibição de destaques turísticos
+* Sistema de tags por destino
+* Página personalizada para destinos não encontrados
+* Geração dinâmica de metadados
+* Configuração de Open Graph
+* Otimização de imagens com `next/image`
+* Navegação utilizando `next/link`
+* Layout responsivo
+* Componentização da interface
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+* **Next.js 15**
+* **React 19**
+* **TypeScript**
+* **App Router**
+* **CSS Modules**
+* **Next Image**
+* **ESLint**
+* **Git**
+* **GitHub**
+
+---
+
+## 🧠 Conceitos aplicados
+
+Este projeto demonstra a utilização de conceitos importantes do desenvolvimento moderno com Next.js:
+
+### Rotas dinâmicas
+
+Cada destino possui uma página própria através da estrutura:
+
+```text
+/destinos/[slug]
+```
+
+Exemplo:
+
+```text
+/destinos/paris
+```
+
+---
+
+### SEO dinâmico
+
+As páginas dos destinos utilizam `generateMetadata` para criar título, descrição e informações de Open Graph dinamicamente de acordo com o destino acessado.
+
+Isso permite que cada página tenha metadados específicos para mecanismos de pesquisa e compartilhamento.
+
+---
+
+### Tratamento de páginas inexistentes
+
+Caso um destino informado na URL não exista, a aplicação utiliza:
+
+```typescript
+notFound()
+```
+
+para apresentar uma página 404 personalizada.
+
+---
+
+### Otimização de imagens
+
+As imagens são renderizadas utilizando o componente:
+
+```typescript
+next/image
+```
+
+permitindo que o Next.js realize otimizações de carregamento e responsividade.
+
+---
+
+## 📁 Estrutura principal
+
+```text
+portal-viagens/
+│
+├── public/
+│
+├── src/
+│   ├── app/
+│   │   ├── destinos/
+│   │   │   ├── [slug]/
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── not-found.tsx
+│   │   └── page.tsx
+│   │
+│   ├── components/
+│   │   ├── CardDestino.tsx
+│   │   ├── Header.tsx
+│   │   └── Footer.tsx
+│   │
+│   └── lib/
+│       └── destinos.ts
+│
+├── package.json
+├── next.config.ts
+└── tsconfig.json
+```
+
+---
+
+## ▶️ Executando o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/Magnum2029/portal-viagens.git
+```
+
+### 2. Entre na pasta
+
+```bash
+cd portal-viagens
+```
+
+### 3. Instale as dependências
+
+```bash
+npm install
+```
+
+### 4. Execute em modo de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação ficará disponível normalmente em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ Build de produção
 
-To learn more about Next.js, take a look at the following resources:
+Para gerar uma versão otimizada:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Para iniciar a versão de produção:
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔍 Qualidade de código
+
+O projeto possui ESLint configurado.
+
+Para executar a análise:
+
+```bash
+npm run lint
+```
+
+---
+
+## 🌐 Deploy
+
+A publicação online será adicionada após a configuração do deploy.
+
+---
+
+## 📈 Melhorias futuras
+
+Algumas evoluções previstas para o projeto:
+
+* Integração com API externa de turismo
+* Sistema de pesquisa de destinos
+* Filtros por país e categoria
+* Favoritos
+* Novos destinos
+* Melhorias de acessibilidade
+* Testes automatizados
+* CI/CD com GitHub Actions
+
+---
+
+## 👨‍💻 Autor
+
+**Magnum de Oliveira Santos**
+
+Desenvolvedor Front-End & Back-End
+
+* GitHub: https://github.com/Magnum2029
+* Portfólio: https://github.com/Magnum2029/portfolio-magnum-react
+
+---
+
+⭐ Projeto desenvolvido como parte da evolução profissional em desenvolvimento Front-End com React, TypeScript e Next.js.
