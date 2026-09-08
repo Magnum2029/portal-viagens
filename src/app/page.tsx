@@ -1,32 +1,77 @@
-import Link from 'next/link';
-import styles from './page.module.css';
-
+import Link from "next/link";
+import styles from "./page.module.css";
 
 export default function HomePage() {
-return (
-<section className={styles.hero}>
-<div>
-<span className={styles.badge}>✈️ Portal de Viagens</span>
-<h1 className={styles.title}>Descubra destinos incríveis pelo mundo</h1>
-<p className={styles.subtitle}>
-Explore nossa seleção de destinos, veja detalhes, imagens e prepare sua próxima aventura.
-</p>
-<Link className="button" href="/destinos">Ver lista de destinos</Link>
-<hr className="hr" />
-<p style={{ color: 'var(--muted)' }}>
-Feito com Next.js (App Router), rotas dinâmicas, next/link, next/image e Módulos CSS.
-</p>
-</div>
-<div className={styles.card}>
-<ul style={{ margin: 0, padding: 0, listStyle: 'none', lineHeight: 1.8 }}>
-<li>• Rotas baseadas em arquivos</li>
-<li>• Rotas dinâmicas com SSG</li>
-<li>• Layout compartilhado (Header/Footer)</li>
-<li>• Módulos CSS por componente</li>
-<li>• Imagens otimizadas</li>
-<li>• 404 com <code>notFound()</code></li>
-</ul>
-</div>
-</section>
-);
+  return (
+    <main>
+      <section className={styles.hero}>
+        <div className={styles.content}>
+          <span className={styles.badge}>
+            ✈️ Explore o mundo
+          </span>
+
+          <h1 className={styles.title}>
+            Descubra lugares que merecem fazer parte da sua próxima viagem.
+          </h1>
+
+          <p className={styles.subtitle}>
+            Explore destinos incríveis, conheça os principais pontos turísticos
+            e encontre inspiração para planejar sua próxima aventura.
+          </p>
+
+          <div className={styles.actions}>
+            <Link
+              href="/destinos"
+              className={styles.primaryButton}
+            >
+              Explorar destinos →
+            </Link>
+
+            <a
+              href="#destaques"
+              className={styles.secondaryButton}
+            >
+              Conheça o projeto
+            </a>
+          </div>
+        </div>
+
+        <div className={styles.card} id="destaques">
+          <h2 className={styles.cardTitle}>
+            Sua próxima aventura começa aqui
+          </h2>
+
+          <ul className={styles.features}>
+            <li className={styles.feature}>
+              <span className={styles.icon}>🌍</span>
+              <span>
+                Descubra destinos selecionados ao redor do mundo.
+              </span>
+            </li>
+
+            <li className={styles.feature}>
+              <span className={styles.icon}>📍</span>
+              <span>
+                Conheça os principais destaques de cada destino.
+              </span>
+            </li>
+
+            <li className={styles.feature}>
+              <span className={styles.icon}>📅</span>
+              <span>
+                Veja qual é a melhor época para realizar sua viagem.
+              </span>
+            </li>
+
+            <li className={styles.feature}>
+              <span className={styles.icon}>✈️</span>
+              <span>
+                Encontre inspiração para planejar sua próxima aventura.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  );
 }
