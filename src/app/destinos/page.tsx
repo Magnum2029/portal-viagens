@@ -1,26 +1,30 @@
-import CardDestino from '@/components/CardDestino';
-import { getAllDestinos } from '@/lib/destinos';
-import styles from './page.module.css';
+import DestinosClient from "@/components/DestinosClient";
+import { getAllDestinos } from "@/lib/destinos";
+import styles from "./page.module.css";
 
-
-export const dynamic = 'force-static';
-
+export const dynamic = "force-static";
 
 export default function DestinosPage() {
-const destinos = getAllDestinos();
+  const destinos = getAllDestinos();
 
+  return (
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <span className={styles.eyebrow}>
+          🌍 Explore o mundo
+        </span>
 
-return (
-<section>
-<div className={styles.header}>
-<h1 className={styles.title}>Destinos</h1>
-</div>
-<p className={styles.subtitle}>Escolha um destino para ver mais detalhes:</p>
-<div className="grid">
-{destinos.map((d) => (
-<CardDestino key={d.id} destino={d} />
-))}
-</div>
-</section>
-);
+        <h1 className={styles.title}>
+          Encontre seu próximo destino
+        </h1>
+
+        <p className={styles.subtitle}>
+          Pesquise por cidade ou país e utilize as categorias
+          para encontrar o destino ideal para sua próxima viagem.
+        </p>
+      </header>
+
+      <DestinosClient destinos={destinos} />
+    </main>
+  );
 }
