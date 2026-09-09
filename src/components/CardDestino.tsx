@@ -1,33 +1,76 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import styles from './CardDestino.module.css';
+import Image from "next/image";
+import Link from "next/link";
+import type { Destino } from "@/lib/destinos";
+import styles from "./CardDestino.module.css";
 
-
-export type DestinoCard = {
-id: number;
-slug: string;
-nome: string;
-pais: string;
-imagem: string; // URL remota (Unsplash/Pexels)
+type CardDestinoProps = {
+  destino: Destino;
 };
 
+export default function CardDestino({
+  destino,
+}: CardDestinoProps) {
+  return (
+    <Link
+      href={`/destinos/${destino.slug}`}
+      className={styles.card}
+      aria-label={`Ver detalhes de ${destino.nome}`}
+    >
+      <div className={styles.media}>
+        <Image
+          src={destino.imagem}
+          alt={`${destino.nome}, ${destino.pais}`}
+          fill
+          sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 50vw"
+          className={styles.image}
+        />
 
-export default function CardDestino({ destino }: { destino: DestinoCard }) {
-return (
-<Link href={`/destinos/${destino.slug}`} className={styles.card}>
-<div className={styles.media}>
-<Image
-src={destino.imagem}
-alt={`Foto de ${destino.nome}`}
-fill
-sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-priority={false}
-/>
-</div>
-<div className={styles.content}>
-<h3 className={styles.name}>{destino.nome}</h3>
-<p className={styles.country}>{destino.pais}</p>
-</div>
-</Link>
-);
+        <div className={styles.imageOverlay} />
+
+        <span className={styles.countryBadge}>
+          {destino.pais}
+        </span>
+      </div>
+
+      <div className={styles.content}>
+        <div className={styles.heading}>
+          <h2 className={styles.name}>
+            {destino.nome}
+          </h2>
+
+          <span className={styles.timezone}>
+            {destino.fuso}
+          </span>
+        </div>
+
+        <p className={styles.description}>
+          {destino.descricao}
+        </p>
+
+        <div className={styles.tags}>
+          {destino.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className={styles.tag}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+
+        <div className={styles.footer}>
+          <span className={styles.details}>
+            Ver detalhes
+          </span>
+
+          <span
+            className={styles.arrow}
+            aria-hidden="true"
+          >
+            →
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
 }
