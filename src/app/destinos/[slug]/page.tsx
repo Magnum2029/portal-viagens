@@ -1,10 +1,12 @@
-// src/app/destinos/[slug]/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import styles from "./page.module.css";
-import { getDestinoBySlug } from "@/lib/destinos";
+import {
+  getAllDestinos,
+  getDestinoBySlug,
+} from "@/lib/destinos";
 
 type PageProps = {
   params: Promise<{
@@ -12,9 +14,15 @@ type PageProps = {
   }>;
 };
 
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
+export function generateStaticParams() {
+  return getAllDestinos().map((destino) => ({
+    slug: destino.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const destino = getDestinoBySlug(slug);
 
@@ -33,12 +41,16 @@ export async function generateMetadata(
     openGraph: {
       title,
       description: destino.descricao,
-      images: destino.imagem ? [{ url: destino.imagem }] : undefined,
+      images: destino.imagem
+        ? [{ url: destino.imagem }]
+        : undefined,
     },
   };
 }
 
-export default async function DestinoDetalhe({ params }: PageProps) {
+export default async function DestinoDetalhe({
+  params,
+}: PageProps) {
   const { slug } = await params;
   const destino = getDestinoBySlug(slug);
 
@@ -47,57 +59,167 @@ export default async function DestinoDetalhe({ params }: PageProps) {
   }
 
   return (
-    <article className={styles.wrap}>
-      <h1 className={styles.title}>{destino.nome}</h1>
-
-      <p className={styles.location}>
-        {destino.pais} • Fuso: {destino.fuso}
-      </p>
-
-      <div className={styles.image}>
-        <Image
-          src={destino.imagem}
-          alt={`Foto de ${destino.nome}`}
-          fill
-          sizes="(max-width: 980px) 100vw, 60vw"
-          priority
-        />
-      </div>
-
-      <div className={styles.badges}>
-        {destino.tags.map((tag) => (
-          <span key={tag} className={styles.badge}>
-            #{tag}
-          </span>
-        ))}
-      </div>
-
-      <div className={styles.block}>
-        <h2 style={{ marginTop: 0 }}>Sobre</h2>
-
-        <p style={{ color: "var(--muted)" }}>
-          {destino.descricao}
-        </p>
-
-        <hr className="hr" />
-
-        <h3>Melhor época</h3>
-        <p>{destino.melhorEpoca}</p>
-
-        <h3>Destaques</h3>
-
-        <ul>
-          {destino.destaques.map((destaque) => (
-            <li key={destaque}>
-              {destaque}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <Link className="button" href="/destinos">
-        ← Voltar aos destinos
+    <main className={styles.container}>
+      <Link
+        href="/destinos"
+        className={styles.backLink}
+      >
+        ← Voltar para destinos
       </Link>
-    </article>
+
+      <article>
+        <header className={styles.header}>
+          <div>
+            <span className={styles.eyebrow}>
+              🌍 Destino selecionado
+            </span>
+
+            <h1 className={styles.title}>
+              {destino.nome}
+            </h1>
+
+            <p className={styles.location}>
+              {destino.pais}
+              <span aria-hidden="true"> • </span>
+              Fuso horário: {destino.fuso}
+            </p>
+          </div>
+
+          <div className={styles.tags}>
+            {destino.tags.map((tag) => (
+              <span
+                key={tag}
+                className={styles.tag}
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        <div className={styles.heroImage}>
+          <Image
+            src={destino.imagem}
+            alt={`${destino.nome}, ${destino.pais}`}
+            fill
+            sizes="(max-width: 900px) 100vw, 1100px"
+            className={styles.image}
+            priority
+          />
+
+          <div className={styles.imageOverlay} />
+
+          <div className={styles.imageCaption}>
+            <span>{destino.nome}</span>
+            <small>{destino.pais}</small>
+          </div>
+        </div>
+
+        <div className={styles.contentGrid}>
+          <section className={styles.mainContent}>
+            <div className={styles.section}>
+              <span className={styles.sectionLabel}>
+                Sobre o destino
+              </span>
+
+              <h2>Conheça {destino.nome}</h2>
+
+              <p className={styles.description}>
+                {destino.descricao}
+              </p>
+            </div>
+
+            <div className={styles.section}>
+              <span className={styles.sectionLabel}>
+                O que conhecer
+              </span>
+
+              <h2>Principais destaques</h2>
+
+              <div className={styles.highlights}>
+                {destino.destaques.map(
+                  (destaque, index) => (
+                    <div
+                      key={destaque}
+                      className={styles.highlight}
+                    >
+                      <span
+                        className={styles.highlightNumber}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span>{destaque}</span>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </section>
+
+          <aside className={styles.sidebar}>
+            <div className={styles.infoCard}>
+              <span className={styles.infoIcon}>
+                📅
+              </span>
+
+              <div>
+                <span className={styles.infoLabel}>
+                  Melhor época
+                </span>
+
+                <p>{destino.melhorEpoca}</p>
+              </div>
+            </div>
+
+            <div className={styles.infoCard}>
+              <span className={styles.infoIcon}>
+                🕒
+              </span>
+
+              <div>
+                <span className={styles.infoLabel}>
+                  Fuso horário
+                </span>
+
+                <p>{destino.fuso}</p>
+              </div>
+            </div>
+
+            <div className={styles.infoCard}>
+              <span className={styles.infoIcon}>
+                📍
+              </span>
+
+              <div>
+                <span className={styles.infoLabel}>
+                  País
+                </span>
+
+                <p>{destino.pais}</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div className={styles.bottomAction}>
+          <div>
+            <h2>Continue explorando</h2>
+
+            <p>
+              Conheça outros destinos disponíveis no
+              Portal de Viagens.
+            </p>
+          </div>
+
+          <Link
+            href="/destinos"
+            className={styles.button}
+          >
+            Ver outros destinos →
+          </Link>
+        </div>
+      </article>
+    </main>
   );
 }

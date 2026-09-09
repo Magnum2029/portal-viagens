@@ -1,9 +1,9 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <main>
+    <main className={styles.main}>
       <section className={styles.hero}>
         <div className={styles.content}>
           <span className={styles.badge}>
@@ -11,12 +11,14 @@ export default function HomePage() {
           </span>
 
           <h1 className={styles.title}>
-            Descubra lugares que merecem fazer parte da sua próxima viagem.
+            Descubra lugares que merecem fazer parte da sua
+            próxima viagem.
           </h1>
 
           <p className={styles.subtitle}>
-            Explore destinos incríveis, conheça os principais pontos turísticos
-            e encontre inspiração para planejar sua próxima aventura.
+            Explore destinos incríveis, conheça os principais
+            destaques de cada lugar e encontre inspiração para
+            planejar sua próxima aventura.
           </p>
 
           <div className={styles.actions}>
@@ -28,47 +30,33 @@ export default function HomePage() {
             </Link>
 
             <a
-              href="#destaques"
+              href="https://github.com/Magnum2029/portal-viagens"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.secondaryButton}
             >
-              Conheça o projeto
+              Ver código no GitHub ↗
             </a>
           </div>
         </div>
 
-        <div className={styles.card} id="destaques">
-          <h2 className={styles.cardTitle}>
-            Sua próxima aventura começa aqui
-          </h2>
+        <div className={styles.featureCard}>
+          <span className={styles.featureIcon}>
+            🌍
+          </span>
 
-          <ul className={styles.features}>
-            <li className={styles.feature}>
-              <span className={styles.icon}>🌍</span>
-              <span>
-                Descubra destinos selecionados ao redor do mundo.
-              </span>
-            </li>
+          <h2>Sua próxima aventura começa aqui</h2>
 
-            <li className={styles.feature}>
-              <span className={styles.icon}>📍</span>
-              <span>
-                Conheça os principais destaques de cada destino.
-              </span>
-            </li>
+          <p>
+            Encontre informações essenciais para escolher seu
+            próximo destino.
+          </p>
 
-            <li className={styles.feature}>
-              <span className={styles.icon}>📅</span>
-              <span>
-                Veja qual é a melhor época para realizar sua viagem.
-              </span>
-            </li>
-
-            <li className={styles.feature}>
-              <span className={styles.icon}>✈️</span>
-              <span>
-                Encontre inspiração para planejar sua próxima aventura.
-              </span>
-            </li>
+          <ul>
+            <li>Destinos selecionados</li>
+            <li>Principais pontos turísticos</li>
+            <li>Melhor época para viajar</li>
+            <li>Inspiração para sua próxima viagem</li>
           </ul>
         </div>
       </section>
